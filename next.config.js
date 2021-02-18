@@ -1,10 +1,14 @@
 module.exports = {
   async rewrites() {
     return [
-      // Rewrite everything else to use `pages/index`
       {
-        source: '/:path*',
-        destination: '/',
+        source: "/api/:any*",
+        destination: "/api/:any*",
+      },
+      // Rewrite everything else to use `pages/app`
+      {
+        source: "/app/:path*",
+        destination: "/app",
       },
     ];
   },

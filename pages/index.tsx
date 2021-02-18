@@ -1,38 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import NextLink from 'next/link';
+import { useRouter } from "next/router";
+import React from "react";
 
-export default function App() {
+const Index = (props: { message: string }) => {
+  const router = useRouter();
   return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-          <li>
-            <NextLink href="/settings">Settings (SSR)</NextLink>
-          </li>
-        </ul>
-
-        <Switch>
-          <Route path="/about">
-            <h1>About</h1>
-          </Route>
-          <Route path="/topics">
-            <h1>Topics</h1>
-          </Route>
-          <Route path="/">
-            <h1>Home</h1>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div>
+      <h1>its me the app</h1>
+      <h2>{props.message}</h2>
+      <button onClick={() => router.push("/app")}>go to client side</button>
+    </div>
   );
-}
+};
+export default Index;
+
+export const getServerSideProps = () => {
+  return { props: { message: "INSANE MALDING" } };
+};
